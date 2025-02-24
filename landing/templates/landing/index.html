@@ -1,0 +1,44 @@
+<!-- dashboard/templates/dashboard/home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishified</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'landing/style.css' %}">
+    <script src="{% static 'landing/script.js' %}" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Saira+Stencil+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="{% static 'landing/logo.png' %}" alt="Phishified">
+        <nav>
+            <span><a href="#">Home</a></span>
+            <span><a href="#">Documentation</a></span>
+            <span><a href="#">Cybertified</a></span>
+            <span id="nav-login"><a href="/accounts/auth">Login/Signup</a></span>
+        </nav>
+    </header>
+    <main>
+        <section class="intro-section">
+            <div class="intro-text">
+                <h1>A <span style="color: #ff132b;"> Red Team</span><br>Phishing Simulator Suite </h1>
+                <div class="typing-container">
+                    <span id="typing-text"></span>
+                </div>
+                <span id="button-trynow"><button>Try Now</button></span><span id="button-github"><button>Github</button></span>
+            </div>
+            <div class="intro-image">
+                <img src="{% static 'landing/phishing-introsec.webp' %}" alt="Phishified Introduction">
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Cybertified</p>
+    </footer>
+</body>
+</html>

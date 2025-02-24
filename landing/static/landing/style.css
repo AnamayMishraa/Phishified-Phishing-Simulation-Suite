@@ -1,0 +1,200 @@
+/* dashboard/static/dashboard/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+header {
+    font-family: "Saira Stencil One", serif;
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -10px;
+}
+
+header img {
+    height: 10rem;
+    width: 15rem;
+    margin: 8px 0px 0px 23px;
+}
+
+header nav {
+    margin-bottom: 58px
+}
+
+header nav a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    margin: 0 10px;
+    padding-top: 20px
+}
+
+header nav span {
+    background-color: #ffffff;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); 
+    position: relative;
+    padding: 5px 10px;
+    margin: 8px
+}
+header nav #nav-login {
+    background-color: #ff132b;
+}
+header nav span:hover {
+        transform: translate(-3px, -3px);
+        box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.3);
+    }
+
+main {
+    padding: 20px;
+    font-family: "Lexend", serif;
+    text-align: center;
+}
+
+.intro-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 7px rgb(0 0 0);
+    border-radius: 24px;
+}
+
+.intro-text {
+    flex: 1;
+    max-width: 50%;
+    padding-right: 30px;
+}
+
+.intro-text h1 {
+    font-size: 40px;
+    font-family: "Saira Stencil One", serif;
+    font-weight: bold;
+}
+
+.typing-container {
+    height: 100px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+
+
+.intro-image {
+    flex: 1;
+    max-width: 50%;
+}
+
+.intro-image img {
+    height: 70%;
+    width: 70%;
+    border-radius: 10px;
+    box-shadow: 0 7px 16px rgb(0 0 0);
+}
+
+main section div #button-trynow {
+    margin: 0px 237px 0px 0px;
+}
+main section div #button-github{
+    margin: 0px 150px 0px 0px;
+}
+
+
+button, 
+button::after {
+  position:absolute;
+  width: 189px;
+  height: 58px;
+  font-size: 20px;
+  font-family: 'Lexend', cursive;
+  background: linear-gradient(45deg, transparent 5%, #1B1404 5%);
+  border: 0;
+  color: #fff;
+  box-shadow: 6px 0 0 #00e6f6;
+  outline: transparent;
+  
+}
+
+button::after {
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+  content: 'Try Now';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 3%, #00e6f6 3%, #00e6f6 5%, #ff132b 5%);
+  text-shadow: -3px -3px 0 #f8f005, 3px 3px 0 #00e6f6;
+  clip-path: var(--slice-0);
+}
+
+button:hover::after {
+  animation: glitch 1s steps(2, end);
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: var(--slice-1);
+    transform: translate(-20px, -10px);
+  }
+  10% {
+    clip-path: var(--slice-3);
+    transform: translate(10px, 10px);
+}
+  20% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 10px);
+  }
+  30% {
+    clip-path: var(--slice-3);
+    transform: translate(0px, 5px);
+  }
+  40% {
+    clip-path: var(--slice-2);
+    transform: translate(-5px, 0px);
+  }
+  50% {
+    clip-path: var(--slice-3);
+    transform: translate(5px, 0px);
+  }
+  60% {
+    clip-path: var(--slice-4);
+    transform: translate(5px, 10px);
+  }
+  70%{
+    clip-path: var(--slice-2);
+    transform: translate(-10px, 10px);
+  }
+  80% {
+    clip-path: var(--slice-5);
+    transform: translate(20px, -10px);
+  }
+  90% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 0px);
+  }
+  100% {
+    clip-path: var(--slice-1);
+    transform: translate(0);
+  }
+}
+
+footer {
+    background-color: #1e88e5;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    bottom: 0;
+}

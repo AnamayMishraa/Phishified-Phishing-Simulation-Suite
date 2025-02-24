@@ -1,0 +1,61 @@
+{% extends "dashboard/base_dashboard.html" %}
+
+{% block content %}
+
+{% if messages %}
+<div class="container mt-3">
+    {% for message in messages %}
+    <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Teams</h2>
+
+    <!-- If user is not in a team -->
+    {% if not user_team %}
+    <div class="card p-3 mb-4">
+        <h4>Create a Team</h4>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" class="form-control mb-2" name="team_name" placeholder="Enter team name" required>
+            <button type="submit" name="create_team" class="btn btn-primary">Create Team</button>
+        </form>
+    </div>
+
+    <div class="card p-3">
+        <h4>Team Requests</h4>
+        <p>No team requests yet.</p>
+    </div>
+
+    {% else %}
+    <!-- If user is already in a team -->
+    <div class="card p-3 mb-4">
+        <h4>Team Info</h4>
+        <p><strong>Name:</strong> {{ user_team.name }}</p>
+        <p><strong>Team Lead:</strong> {{ user_team.leader.get_full_name }}</p>
+        <p><strong>Total Members:</strong> {{ user_team.members.count }}</p>
+        <p><strong>Total Campaigns:</strong> {{ user_team.total_campaigns }}</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" name="leave_team" class="btn btn-danger">Leave Team</button>
+            {% if user == user_team.leader %}
+                <button type="submit" name="delete_team" class="btn btn-danger ms-2">Delete Team</button>
+            {% endif %}
+        </form>
+    </div>
+
+    <div class="card p-3">
+        <h4>Team Members</h4>
+        <ul class="list-group">
+            {% for member in team_members %}
+            <li class="list-group-item">{{ member.username }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

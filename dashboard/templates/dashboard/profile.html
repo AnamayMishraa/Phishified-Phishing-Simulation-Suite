@@ -1,0 +1,54 @@
+{% extends "dashboard/base_dashboard.html" %}
+{% block content %}
+<div class="container">
+    <h2 class="text-center">User Profile</h2>
+
+    <div class="card p-4 shadow-sm">
+        <div class="row">
+            <!-- Profile Info Section -->
+            <div class="col-md-6">
+                <h4>Profile Details</h4>
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>Full Name:</strong> {{ user.get_full_name }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>Role:</strong> {{ user.profile.role|default:"User" }}</p>
+                <p><strong>Team:</strong> 
+                    {% if user.profile.team %}
+                        {{ user.profile.team.name }}
+                        <form method="post">
+                            {% csrf_token %}
+                            <button type="submit" name="leave_team" class="btn btn-danger btn-sm mt-2">Leave Team</button>
+                        </form>
+                    {% else %}
+                        <span class="text-muted">Not in a team</span>
+                        <form method="post">
+                            {% csrf_token %}
+                            <select name="team_id" class="form-control">
+                                {% for team in teams %}
+                                    <option value="{{ team.id }}">{{ team.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" name="join_team" class="btn btn-success btn-sm mt-2">Join Team</button>
+                        </form>
+                    {% endif %}
+                </p>
+            </div>
+
+            <!-- Edit Profile Section -->
+            <div class="col-md-6">
+                <h4>Edit Profile</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="name">Full Name</label>
+                    <input type="text" name="name" class="form-control mb-2" value="{{ user.get_full_name }}" required>
+
+                    <label for="password">New Password</label>
+                    <input type="password" name="password" class="form-control mb-2">
+
+                    <button type="submit" name="update_profile" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

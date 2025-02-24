@@ -1,0 +1,27 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>User Profile: {{ user.username }}</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-2">
+            <label class="form-label">First Name</label>
+            {{ form.first_name }}
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Last Name</label>
+            {{ form.last_name }}
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Email</label>
+            {{ form.email }}
+        </div>
+        <button type="submit" name="edit_user" class="btn btn-primary">Save Changes</button>
+        <button type="submit" name="delete_user" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?');">
+            Delete User
+        </button>
+    </form>
+</div>
+{% endblock %}

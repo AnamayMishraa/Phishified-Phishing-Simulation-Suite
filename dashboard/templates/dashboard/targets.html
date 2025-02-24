@@ -1,0 +1,78 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">🎯 Manage Targets</h2>
+
+    <!-- Success Messages -->
+    {% if messages %}
+    <div class="alert alert-success">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Add Target Manually -->
+    <div class="card p-4 mb-3">
+        <h4>Add Target Manually</h4>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-2">
+                <label class="form-label">Name</label>
+                {{ form.name }}
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Email</label>
+                {{ form.email }}
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Department</label>
+                {{ form.department }}
+            </div>
+            <button type="submit" name="add_target" class="btn btn-primary">Add Target</button>
+        </form>
+    </div>
+
+    <!-- Upload Targets (CSV) -->
+    <div class="card p-4 mb-3">
+        <h4>Upload Targets via CSV</h4>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ upload_form.file }}
+            <button type="submit" name="upload_targets" class="btn btn-success">Upload</button>
+        </form>
+        <p class="mt-2"><strong>CSV Format:</strong> Name, Email, Department</p>
+    </div>
+
+    <!-- Display Existing Targets -->
+    <div class="card p-4">
+        <h4>Existing Targets</h4>
+          <!-- Search Bar -->
+    <form method="GET" class="mb-3">
+        <input type="text" name="search" class="form-control" placeholder="Search users..." value="{{ query }}">
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+    </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for target in targets %}
+                <tr>
+                    <td><a href="{% url 'user_profile' target.user.id %}">{{ target.name }}</a></td>
+                    <td>{{ target.email }}</td>
+                    <td>{{ target.department}}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="3">No targets added yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
